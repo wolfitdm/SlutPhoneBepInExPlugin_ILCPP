@@ -31,6 +31,8 @@ namespace SlutPhoneBepInEx_IL2CPP
         private static KeyCode KeyCodeC = KeyCode.C;
         private static KeyCode KeyCodeV = KeyCode.V;
         private static KeyCode KeyCodeU = KeyCode.U;
+        private static KeyCode KeyCodeL = KeyCode.L;
+        private static KeyCode KeyCodeM = KeyCode.M;
 
         private static bool useMaxValues = false;
 
@@ -44,8 +46,25 @@ namespace SlutPhoneBepInEx_IL2CPP
         private static ConfigEntry<KeyCode> configKeyCodeK;
         private static ConfigEntry<KeyCode> configKeyCodeC;
         private static ConfigEntry<KeyCode> configKeyCodeV;
+        private static ConfigEntry<KeyCode> configKeyCodeL;
+        private static ConfigEntry<KeyCode> configKeyCodeM;
         private static ConfigEntry<KeyCode> configKeyCodeU;
         private static ConfigEntry<bool> configUseMaxValues;
+
+        private static int minValue(int value, int min = 0, int max = 17)
+        {
+            if (value <= min) 
+            {
+                value = min;
+            }
+            
+            if (value >= max)
+            {
+                value = max;
+            }
+
+            return value;
+        }
 
         private void initConfig()
         {
@@ -99,6 +118,16 @@ namespace SlutPhoneBepInEx_IL2CPP
                        KeyCode.V,
                        "KeyCode to decrease corruption, default V");
 
+            configKeyCodeL = Config.Bind("General",
+                       "KeyCodeL",
+                       KeyCode.L,
+                       "KeyCode to set corruption to 0, default L");
+
+            configKeyCodeM = Config.Bind("General",
+                       "KeyCodeM",
+                       KeyCode.M,
+                       "KeyCode to set corruption to 100, default M");
+
             configKeyCodeU = Config.Bind("General",
                        "KeyCodeU",
                        KeyCode.U,
@@ -120,6 +149,8 @@ namespace SlutPhoneBepInEx_IL2CPP
             KeyCodeC = configKeyCodeC.Value;
             KeyCodeV = configKeyCodeV.Value;
             KeyCodeU = configKeyCodeU.Value;
+            KeyCodeL = configKeyCodeL.Value;
+            KeyCodeM = configKeyCodeM.Value;
 
             useMaxValues = configUseMaxValues.Value;
         }
@@ -499,6 +530,7 @@ namespace SlutPhoneBepInEx_IL2CPP
                     if (variableManager.intVariables.TryGetValue("Dad", out int dad))
                     {
                         dad++;
+                        dad = minValue(dad);
                         variableManager.SetVariable("Dad", dad);
                         Logger.LogInfo($"Dad relationship increased: {dad}");
                         try
@@ -538,6 +570,7 @@ namespace SlutPhoneBepInEx_IL2CPP
                     if (variableManager.intVariables.TryGetValue("Dad", out int dad))
                     {
                         dad--;
+                        dad = minValue(dad);
                         variableManager.SetVariable("Dad", dad);
                         Logger.LogInfo($"Dad relationship decreased: {dad}");
                         try
@@ -577,6 +610,7 @@ namespace SlutPhoneBepInEx_IL2CPP
                     if (variableManager.intVariables.TryGetValue("Babe", out int babe))
                     {
                         babe++;
+                        babe = minValue(babe);
                         variableManager.SetVariable("Babe", babe);
                         Logger.LogInfo($"Babe relationship increased: {babe}");
                         try
@@ -616,6 +650,7 @@ namespace SlutPhoneBepInEx_IL2CPP
                     if (variableManager.intVariables.TryGetValue("Babe", out int babe))
                     {
                         babe--;
+                        babe = minValue(babe);
                         variableManager.SetVariable("Babe", babe);
                         Logger.LogInfo($"Babe relationship decreased: {babe}");
                         try
@@ -655,6 +690,7 @@ namespace SlutPhoneBepInEx_IL2CPP
                     if (variableManager.intVariables.TryGetValue("John", out int john))
                     {
                         john++;
+                        john = minValue(john);
                         variableManager.SetVariable("John", john);
                         Logger.LogInfo($"John relationship increased: {john}");
                         try
@@ -694,6 +730,7 @@ namespace SlutPhoneBepInEx_IL2CPP
                     if (variableManager.intVariables.TryGetValue("John", out int john))
                     {
                         john--;
+                        john = minValue(john);
                         variableManager.SetVariable("John", john);
                         Logger.LogInfo($"John relationship decreased: {john}");
                         try
@@ -733,6 +770,7 @@ namespace SlutPhoneBepInEx_IL2CPP
                     if (variableManager.intVariables.TryGetValue("Corruption", out int corr))
                     {
                         corr++;
+                        corr = minValue(corr, 0, 12);
                         variableManager.SetVariable("Corruption", corr);
                         Logger.LogInfo($"Corruption increased: {corr}");
                         try
@@ -766,6 +804,7 @@ namespace SlutPhoneBepInEx_IL2CPP
                     if (variableManager.intVariables.TryGetValue("Corruption", out int corr))
                     {
                         corr--;
+                        corr = minValue(corr, 0, 12);
                         variableManager.SetVariable("Corruption", corr);
                         Logger.LogInfo($"Corruption decreased: {corr}");
                         try
@@ -793,6 +832,74 @@ namespace SlutPhoneBepInEx_IL2CPP
                 }
             }
 
+            if (Input.GetKeyUp(KeyCodeL))
+            {
+                if (variableManager != null)
+                {
+                    if (variableManager.intVariables.TryGetValue("Corruption", out int corr))
+                    {
+                        corr = 0;
+                        variableManager.SetVariable("Corruption", corr);
+                        Logger.LogInfo($"Corruption decreased: {corr}");
+                        try
+                        {
+                            variableManager.intVariables["Corruption"] = corr;
+
+                            if (progressionSystemInstance != null)
+                            {
+                                progressionSystemInstance.changeCorruption(corr);
+                                progressionSystemInstance.setVariable("Corruption", corr);
+                                progressionSystemInstance.changeStat("Corruption", corr);
+                            }
+
+                            if (secondaryAppsInstance != null)
+                            {
+                                secondaryAppsInstance.ChangeCorruption(corr);
+                                secondaryAppsInstance.ChangeStat("Corruption", corr);
+                            }
+
+                            if (useMaxValues)
+                                MaxValues.maxCorruption = corr;
+                        }
+                        catch { }
+                    }
+                }
+            }
+
+            if (Input.GetKeyUp(KeyCodeM))
+            {
+                if (variableManager != null)
+                {
+                    if (variableManager.intVariables.TryGetValue("Corruption", out int corr))
+                    {
+                        corr = 17;
+                        variableManager.SetVariable("Corruption", corr);
+                        Logger.LogInfo($"Corruption decreased: {corr}");
+                        try
+                        {
+                            variableManager.intVariables["Corruption"] = corr;
+
+                            if (progressionSystemInstance != null)
+                            {
+                                progressionSystemInstance.changeCorruption(corr);
+                                progressionSystemInstance.setVariable("Corruption", corr);
+                                progressionSystemInstance.changeStat("Corruption", corr);
+                            }
+
+                            if (secondaryAppsInstance != null)
+                            {
+                                secondaryAppsInstance.ChangeCorruption(corr);
+                                secondaryAppsInstance.ChangeStat("Corruption", corr);
+                            }
+
+                            if (useMaxValues)
+                                MaxValues.maxCorruption = corr;
+                        }
+                        catch { }
+                    }
+                }
+            }
+            
             return true;
         }
         public override void Load()
