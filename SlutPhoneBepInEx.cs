@@ -218,6 +218,14 @@ namespace SlutPhoneBepInEx_IL2CPP
 
             try
             {
+                PatchHarmonyMethod(typeof(SecondaryApps), "Start", "SecondaryApps_Start", false, true);
+            }
+            catch (Exception e)
+            {
+            }
+
+            try
+            {
                 PatchHarmonyMethod(typeof(ChatManager), "DisplayChoices", "ChatManager_DisplayChoices", true, false);
             }
             catch (Exception e)
@@ -247,6 +255,14 @@ namespace SlutPhoneBepInEx_IL2CPP
             catch (Exception e)
             {
             }
+
+            try
+            {
+                PatchHarmonyMethod(typeof(ProgressionSystem), "Initialize", "ProgressionSystem_Initialize", false, true);
+            }
+            catch (Exception e)
+            {
+            }
         }
 
         private static Gallery galleryInstance = null;
@@ -257,6 +273,17 @@ namespace SlutPhoneBepInEx_IL2CPP
                 return;
             }
             galleryInstance = __instance;
+            return;
+        }
+
+        private static ProgressionSystem progressionSystemInstance = null;
+        public static void ProgressionSystem_Initialize(ProgressionSystem __instance)
+        {
+            if (progressionSystemInstance != null)
+            {
+                return;
+            }
+            progressionSystemInstance = __instance;
             return;
         }
 
@@ -322,7 +349,24 @@ namespace SlutPhoneBepInEx_IL2CPP
                 setChoices(choice.subChoices);
             }
         }
-        public static bool SecondaryApps_DisplayChoices(List<Choice> choices) {
+
+        private static SecondaryApps secondaryAppsInstance = null;
+        public static void SecondaryApps_Start(SecondaryApps __instance)
+        {
+            if (secondaryAppsInstance == null)
+            {
+                secondaryAppsInstance = __instance;
+            }
+
+            return;
+        }
+        public static bool SecondaryApps_DisplayChoices(List<Choice> choices, SecondaryApps __instance) {
+            
+            if (secondaryAppsInstance == null)
+            {
+                secondaryAppsInstance = __instance;
+            }
+
             setChoices(choices);
 
             return true;
@@ -450,6 +494,26 @@ namespace SlutPhoneBepInEx_IL2CPP
                         try
                         {
                             variableManager.intVariables["Dad"] = dad;
+
+                            if (progressionSystemInstance != null)
+                            {
+                                progressionSystemInstance.changeStat("Dad", dad);
+                                progressionSystemInstance.setVariable("Dad", dad);
+                                progressionSystemInstance.changeStat("dad", dad);
+                                progressionSystemInstance.setVariable("dad", dad);
+                                progressionSystemInstance.changeStat("maxDad", dad);
+                                progressionSystemInstance.setVariable("maxDad", dad);
+
+                            }
+
+                            if (secondaryAppsInstance != null)
+                            {
+                                secondaryAppsInstance.ChangeStat("Dad", dad);
+                                secondaryAppsInstance.ChangeStat("dad", dad);
+                                secondaryAppsInstance.ChangeStat("maxDad", dad);
+                            }
+
+                            MaxValues.maxDad = dad;
                         }
                         catch { }
                     }
@@ -468,6 +532,26 @@ namespace SlutPhoneBepInEx_IL2CPP
                         try
                         {
                             variableManager.intVariables["Dad"] = dad;
+
+                            if (progressionSystemInstance != null)
+                            {
+                                progressionSystemInstance.changeStat("Dad", dad);
+                                progressionSystemInstance.setVariable("Dad", dad);
+                                progressionSystemInstance.changeStat("dad", dad);
+                                progressionSystemInstance.setVariable("dad", dad);
+                                progressionSystemInstance.changeStat("maxDad", dad);
+                                progressionSystemInstance.setVariable("maxDad", dad);
+
+                            }
+
+                            if (secondaryAppsInstance != null)
+                            {
+                                secondaryAppsInstance.ChangeStat("Dad", dad);
+                                secondaryAppsInstance.ChangeStat("dad", dad);
+                                secondaryAppsInstance.ChangeStat("maxDad", dad);
+                            }
+
+                            MaxValues.maxDad = dad;
                         }
                         catch { }
                     }
@@ -486,6 +570,26 @@ namespace SlutPhoneBepInEx_IL2CPP
                         try
                         {
                             variableManager.intVariables["Babe"] = babe;
+
+                            if (progressionSystemInstance != null)
+                            {
+                                progressionSystemInstance.changeStat("Babe", babe);
+                                progressionSystemInstance.setVariable("Babe", babe);
+                                progressionSystemInstance.changeStat("babe", babe);
+                                progressionSystemInstance.setVariable("babe", babe);
+                                progressionSystemInstance.changeStat("maxBabe", babe);
+                                progressionSystemInstance.setVariable("maxBabe", babe);
+
+                            }
+
+                            if (secondaryAppsInstance != null)
+                            {
+                                secondaryAppsInstance.ChangeStat("Babe", babe);
+                                secondaryAppsInstance.ChangeStat("babe", babe);
+                                secondaryAppsInstance.ChangeStat("maxBabe", babe);
+                            }
+
+                            MaxValues.maxBabe = babe;
                         }
                         catch { }
                     }
@@ -504,6 +608,26 @@ namespace SlutPhoneBepInEx_IL2CPP
                         try
                         {
                             variableManager.intVariables["Babe"] = babe;
+
+                            if (progressionSystemInstance != null)
+                            {
+                                progressionSystemInstance.changeStat("Babe", babe);
+                                progressionSystemInstance.setVariable("Babe", babe);
+                                progressionSystemInstance.changeStat("babe", babe);
+                                progressionSystemInstance.setVariable("babe", babe);
+                                progressionSystemInstance.changeStat("maxBabe", babe);
+                                progressionSystemInstance.setVariable("maxBabe", babe);
+
+                            }
+
+                            if (secondaryAppsInstance != null)
+                            {
+                                secondaryAppsInstance.ChangeStat("Babe", babe);
+                                secondaryAppsInstance.ChangeStat("babe", babe);
+                                secondaryAppsInstance.ChangeStat("maxBabe", babe);
+                            }
+
+                            MaxValues.maxBabe = babe;
                         }
                         catch { }
                     }
@@ -522,6 +646,26 @@ namespace SlutPhoneBepInEx_IL2CPP
                         try
                         {
                             variableManager.intVariables["John"] = john;
+
+                            if (progressionSystemInstance != null)
+                            {
+                                progressionSystemInstance.changeStat("John", john);
+                                progressionSystemInstance.setVariable("John", john);
+                                progressionSystemInstance.changeStat("john", john);
+                                progressionSystemInstance.setVariable("john", john);
+                                progressionSystemInstance.changeStat("maxJohn", john);
+                                progressionSystemInstance.setVariable("maxJohn", john);
+
+                            }
+
+                            if (secondaryAppsInstance != null)
+                            {
+                                secondaryAppsInstance.ChangeStat("John", john);
+                                secondaryAppsInstance.ChangeStat("john", john);
+                                secondaryAppsInstance.ChangeStat("maxJohn", john);
+                            }
+
+                            MaxValues.maxJohn = john;
                         }
                         catch { }
                     }
@@ -540,6 +684,26 @@ namespace SlutPhoneBepInEx_IL2CPP
                         try
                         {
                             variableManager.intVariables["John"] = john;
+                            
+                            if (progressionSystemInstance != null)
+                            {
+                                progressionSystemInstance.changeStat("John", john);
+                                progressionSystemInstance.setVariable("John", john);
+                                progressionSystemInstance.changeStat("john", john);
+                                progressionSystemInstance.setVariable("john", john);
+                                progressionSystemInstance.changeStat("maxJohn", john);
+                                progressionSystemInstance.setVariable("maxJohn", john);
+
+                            }
+
+                            if (secondaryAppsInstance != null)
+                            {
+                                secondaryAppsInstance.ChangeStat("John", john);
+                                secondaryAppsInstance.ChangeStat("john", john);
+                                secondaryAppsInstance.ChangeStat("maxJohn", john);
+                            }
+
+                            MaxValues.maxJohn = john;
                         }
                         catch { }
                     }
@@ -558,6 +722,20 @@ namespace SlutPhoneBepInEx_IL2CPP
                         try
                         {
                             variableManager.intVariables["Corruption"] = corr;
+
+                            if (progressionSystemInstance != null)
+                            {
+                                progressionSystemInstance.changeCorruption(corr);
+                                progressionSystemInstance.changeStat("Corruption", corr);
+                            }
+
+                            if (secondaryAppsInstance != null)
+                            {
+                                secondaryAppsInstance.ChangeCorruption(corr);
+                                secondaryAppsInstance.ChangeStat("Corruption", corr);
+                            }
+
+                            MaxValues.maxCorruption = corr;
                         }
                         catch { }
                     }
@@ -576,7 +754,23 @@ namespace SlutPhoneBepInEx_IL2CPP
                         try
                         {
                             variableManager.intVariables["Corruption"] = corr;
-                        } catch { }
+
+                            if (progressionSystemInstance != null)
+                            {
+                                progressionSystemInstance.changeCorruption(corr);
+                                progressionSystemInstance.setVariable("Corruption", corr);
+                                progressionSystemInstance.changeStat("Corruption", corr);
+                            }
+
+                            if (secondaryAppsInstance != null)
+                            {
+                                secondaryAppsInstance.ChangeCorruption(corr);
+                                secondaryAppsInstance.ChangeStat("Corruption", corr);
+                            }
+
+                            MaxValues.maxCorruption = corr;
+                        }
+                        catch { }
                     }
                 }
             }
