@@ -259,6 +259,14 @@ namespace SlutPhoneBepInEx_IL2CPP
 
             try
             {
+                PatchHarmonyMethod(typeof(SecondaryApps), "DisplayChoices", "SecondaryApps_DisplayChoices_Postfix", false, true);
+            }
+            catch (Exception e)
+            {
+            }
+
+            try
+            {
                 PatchHarmonyMethod(typeof(SecondaryApps), "Start", "SecondaryApps_Start", false, true);
             }
             catch (Exception e)
@@ -268,6 +276,14 @@ namespace SlutPhoneBepInEx_IL2CPP
             try
             {
                 PatchHarmonyMethod(typeof(ChatManager), "DisplayChoices", "ChatManager_DisplayChoices", true, false);
+            }
+            catch (Exception e)
+            {
+            }
+
+            try
+            {
+                PatchHarmonyMethod(typeof(ChatManager), "DisplayChoices", "ChatManager_DisplayChoices_Postfix", false, true);
             }
             catch (Exception e)
             {
@@ -412,6 +428,11 @@ namespace SlutPhoneBepInEx_IL2CPP
 
             return true;
         }
+        public static void SecondaryApps_DisplayChoices_Postfix(List<Choice> choices, SecondaryApps __instance)
+        {
+            setChoices(choices);
+        }
+
 
         private static ChatManager chatManagerInstance = null;
         private static VariableManager variableManager = null;
@@ -477,6 +498,10 @@ namespace SlutPhoneBepInEx_IL2CPP
             }
 
             return true;
+        }
+        public static void ChatManager_DisplayChoices_Postfix(List<Choice> choices, string chat, int mainID, object __instance)
+        {
+            setChoices(choices);
         }
         public static bool MainGame_Update(object __instance)
         {
