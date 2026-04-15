@@ -91,7 +91,7 @@ namespace SlutPhoneBepInEx_IL2CPP
                         KeyCode.C,
                        "KeyCode to increase corruption, default C");
 
-            configKeyCodeN = Config.Bind("General",
+            configKeyCodeV = Config.Bind("General",
                        "KeyCodeV",
                        KeyCode.V,
                        "KeyCode to decrease corruption, default V");
@@ -447,6 +447,11 @@ namespace SlutPhoneBepInEx_IL2CPP
                         dad++;
                         variableManager.SetVariable("Dad", dad);
                         Logger.LogInfo($"Dad relationship increased: {dad}");
+                        try
+                        {
+                            variableManager.intVariables["Dad"] = dad;
+                        }
+                        catch { }
                     }
                 }
             }
@@ -460,6 +465,11 @@ namespace SlutPhoneBepInEx_IL2CPP
                         dad--;
                         variableManager.SetVariable("Dad", dad);
                         Logger.LogInfo($"Dad relationship decreased: {dad}");
+                        try
+                        {
+                            variableManager.intVariables["Dad"] = dad;
+                        }
+                        catch { }
                     }
                 }
             }
@@ -473,6 +483,11 @@ namespace SlutPhoneBepInEx_IL2CPP
                         babe++;
                         variableManager.SetVariable("Babe", babe);
                         Logger.LogInfo($"Babe relationship increased: {babe}");
+                        try
+                        {
+                            variableManager.intVariables["Babe"] = babe;
+                        }
+                        catch { }
                     }
                 }
             }
@@ -486,6 +501,11 @@ namespace SlutPhoneBepInEx_IL2CPP
                         babe--;
                         variableManager.SetVariable("Babe", babe);
                         Logger.LogInfo($"Babe relationship decreased: {babe}");
+                        try
+                        {
+                            variableManager.intVariables["Babe"] = babe;
+                        }
+                        catch { }
                     }
                 }
             }
@@ -499,6 +519,11 @@ namespace SlutPhoneBepInEx_IL2CPP
                         john++;
                         variableManager.SetVariable("John", john);
                         Logger.LogInfo($"John relationship increased: {john}");
+                        try
+                        {
+                            variableManager.intVariables["John"] = john;
+                        }
+                        catch { }
                     }
                 }
             }
@@ -512,6 +537,11 @@ namespace SlutPhoneBepInEx_IL2CPP
                         john--;
                         variableManager.SetVariable("John", john);
                         Logger.LogInfo($"John relationship decreased: {john}");
+                        try
+                        {
+                            variableManager.intVariables["John"] = john;
+                        }
+                        catch { }
                     }
                 }
             }
@@ -525,6 +555,11 @@ namespace SlutPhoneBepInEx_IL2CPP
                         corr++;
                         variableManager.SetVariable("Corruption", corr);
                         Logger.LogInfo($"Corruption increased: {corr}");
+                        try
+                        {
+                            variableManager.intVariables["Corruption"] = corr;
+                        }
+                        catch { }
                     }
                 }
             }
@@ -538,6 +573,10 @@ namespace SlutPhoneBepInEx_IL2CPP
                         corr--;
                         variableManager.SetVariable("Corruption", corr);
                         Logger.LogInfo($"Corruption decreased: {corr}");
+                        try
+                        {
+                            variableManager.intVariables["Corruption"] = corr;
+                        } catch { }
                     }
                 }
             }
