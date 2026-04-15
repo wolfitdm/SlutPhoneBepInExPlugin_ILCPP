@@ -32,6 +32,8 @@ namespace SlutPhoneBepInEx_IL2CPP
         private static KeyCode KeyCodeV = KeyCode.V;
         private static KeyCode KeyCodeU = KeyCode.U;
 
+        private static bool useMaxValues = false;
+
         private static ConfigEntry<KeyCode> configKeyCodeP;
         private static ConfigEntry<KeyCode> configKeyCodeG;
         private static ConfigEntry<KeyCode> configKeyCodeD;
@@ -43,6 +45,7 @@ namespace SlutPhoneBepInEx_IL2CPP
         private static ConfigEntry<KeyCode> configKeyCodeC;
         private static ConfigEntry<KeyCode> configKeyCodeV;
         private static ConfigEntry<KeyCode> configKeyCodeU;
+        private static ConfigEntry<bool> configUseMaxValues;
 
         private void initConfig()
         {
@@ -101,6 +104,11 @@ namespace SlutPhoneBepInEx_IL2CPP
                        KeyCode.U,
                        "KeyCode to show vars, default U");
 
+            configUseMaxValues = Config.Bind("General",
+                       "UseMaxValues",
+                       false,
+                       "Use Max Values, default false");
+
             KeyCodeP = configKeyCodeP.Value;
             KeyCodeG = configKeyCodeG.Value;
             KeyCodeD = configKeyCodeD.Value;
@@ -112,6 +120,8 @@ namespace SlutPhoneBepInEx_IL2CPP
             KeyCodeC = configKeyCodeC.Value;
             KeyCodeV = configKeyCodeV.Value;
             KeyCodeU = configKeyCodeU.Value;
+
+            useMaxValues = configUseMaxValues.Value;
         }
 
         public SlutPhoneBepInEx()
@@ -513,7 +523,8 @@ namespace SlutPhoneBepInEx_IL2CPP
                                 secondaryAppsInstance.ChangeStat("maxDad", dad);
                             }
 
-                            MaxValues.maxDad = dad;
+                            if (useMaxValues)
+                               MaxValues.maxDad = dad;
                         }
                         catch { }
                     }
@@ -551,7 +562,8 @@ namespace SlutPhoneBepInEx_IL2CPP
                                 secondaryAppsInstance.ChangeStat("maxDad", dad);
                             }
 
-                            MaxValues.maxDad = dad;
+                            if (useMaxValues)
+                               MaxValues.maxDad = dad;
                         }
                         catch { }
                     }
@@ -589,7 +601,8 @@ namespace SlutPhoneBepInEx_IL2CPP
                                 secondaryAppsInstance.ChangeStat("maxBabe", babe);
                             }
 
-                            MaxValues.maxBabe = babe;
+                            if (useMaxValues)
+                               MaxValues.maxBabe = babe;
                         }
                         catch { }
                     }
@@ -627,7 +640,8 @@ namespace SlutPhoneBepInEx_IL2CPP
                                 secondaryAppsInstance.ChangeStat("maxBabe", babe);
                             }
 
-                            MaxValues.maxBabe = babe;
+                            if (useMaxValues)
+                               MaxValues.maxBabe = babe;
                         }
                         catch { }
                     }
@@ -665,7 +679,8 @@ namespace SlutPhoneBepInEx_IL2CPP
                                 secondaryAppsInstance.ChangeStat("maxJohn", john);
                             }
 
-                            MaxValues.maxJohn = john;
+                            if (useMaxValues)
+                               MaxValues.maxJohn = john;
                         }
                         catch { }
                     }
@@ -703,7 +718,8 @@ namespace SlutPhoneBepInEx_IL2CPP
                                 secondaryAppsInstance.ChangeStat("maxJohn", john);
                             }
 
-                            MaxValues.maxJohn = john;
+                            if (useMaxValues)
+                               MaxValues.maxJohn = john;
                         }
                         catch { }
                     }
@@ -735,7 +751,8 @@ namespace SlutPhoneBepInEx_IL2CPP
                                 secondaryAppsInstance.ChangeStat("Corruption", corr);
                             }
 
-                            MaxValues.maxCorruption = corr;
+                            if (useMaxValues)
+                               MaxValues.maxCorruption = corr;
                         }
                         catch { }
                     }
@@ -768,7 +785,8 @@ namespace SlutPhoneBepInEx_IL2CPP
                                 secondaryAppsInstance.ChangeStat("Corruption", corr);
                             }
 
-                            MaxValues.maxCorruption = corr;
+                            if (useMaxValues)
+                               MaxValues.maxCorruption = corr;
                         }
                         catch { }
                     }
